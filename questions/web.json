@@ -1,0 +1,72 @@
+[
+  {
+    "id": "web_001",
+    "title": "HTTP Methods",
+    "title_zh": "HTTP 方法辨析",
+    "difficulty": "easy",
+    "tags": ["http", "rest", "theory"],
+    "description": "Explain what each HTTP method does: GET, POST, PUT, PATCH, DELETE. When would you use each?",
+    "description_zh": "解释各 HTTP 方法的用途：GET、POST、PUT、PATCH、DELETE。什么时候用哪个？",
+    "starter_code": "# Write your explanation as a multi-line string:\n\nexplanation = '''\n# Your answer here\n# Example format:\n# GET: ...\n# POST: ...\n'''\nprint(explanation)",
+    "solution": "explanation = '''\nGET: Retrieve a resource. Safe, idempotent. No body.\nPOST: Create a new resource. Not idempotent. May have body.\nPUT: Replace a resource entirely at a given URI. Idempotent.\nPATCH: Partially update a resource. Not necessarily idempotent.\nDELETE: Remove a resource. Idempotent.\n'''",
+    "hint": "GET = retrieve, POST = create, PUT = full replace, PATCH = partial update, DELETE = remove. Consider idempotency and safety.",
+    "hint_zh": "GET=取、POST=新增、PUT=全量替换、PATCH=部分更新、DELETE=删除。考虑幂等性和安全性。",
+    "test_assertions": "assert 'GET' in explanation and 'POST' in explanation\nassert 'PUT' in explanation and 'DELETE' in explanation\nprint('All checks passed!')"
+  },
+  {
+    "id": "web_002",
+    "title": "CSS Flexbox Center",
+    "title_zh": "CSS Flexbox 居中",
+    "difficulty": "easy",
+    "tags": ["css", "flexbox"],
+    "description": "Write CSS to perfectly center a child div inside a parent container using Flexbox.",
+    "description_zh": "用 Flexbox 将子 div 完全居中于父容器中。",
+    "starter_code": "# Write the CSS code as a string:\n\ncss = '''\n/* Parent container */\n.container {\n    /* Your code here */\n}\n\n/* Child element */\n.child {\n    width: 100px;\n    height: 100px;\n    background: steelblue;\n}\n'''\n\nprint(css)",
+    "solution": "css = '''\n.container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.child {\n    width: 100px;\n    height: 100px;\n    background: steelblue;\n}\n'''",
+    "hint": "display: flex + justify-content: center (horizontal) + align-items: center (vertical).",
+    "hint_zh": "display: flex + justify-content: center（水平居中）+ align-items: center（垂直居中）。",
+    "test_assertions": "assert 'display: flex' in css\nassert 'justify-content: center' in css\nassert 'align-items: center' in css\nprint('All checks passed!')"
+  },
+  {
+    "id": "web_003",
+    "title": "Array Methods in JavaScript",
+    "title_zh": "JavaScript 数组方法",
+    "difficulty": "easy",
+    "tags": ["javascript", "array"],
+    "description": "Given an array of numbers, use map, filter, and reduce to: 1) double each number, 2) keep only numbers > 5, 3) sum the result.",
+    "description_zh": "对数字数组：1）用 map 将每个数翻倍，2）用 filter 保留大于 5 的数，3）用 reduce 求和。",
+    "starter_code": "const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// Step 1: double each number using map\nconst doubled = nums; // Your code here\n\n// Step 2: filter numbers > 5\nconst filtered = doubled; // Your code here\n\n// Step 3: sum using reduce\nconst sum = filtered; // Your code here\n\nconsole.log('Doubled:', doubled);\nconsole.log('Filtered (>5):', filtered);\nconsole.log('Sum:', sum);  // Expected: 96",
+    "solution": "const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\nconst doubled = nums.map(n => n * 2);\nconst filtered = doubled.filter(n => n > 5);\nconst sum = filtered.reduce((acc, n) => acc + n, 0);\nconsole.log('Doubled:', doubled);\nconsole.log('Filtered (>5):', filtered);\nconsole.log('Sum:', sum);",
+    "hint": "map transforms each element; filter keeps elements matching a condition; reduce accumulates a single value.",
+    "hint_zh": "map 变换每个元素；filter 保留满足条件的元素；reduce 累积为单一值。",
+    "test_assertions": "assert JSON.stringify(doubled) === '[2,4,6,8,10,12,14,16,18,20]'\nassert JSON.stringify(filtered) === '[6,8,10,12,14,16,18,20]'\nassert sum === 96\nprint('All tests passed!')"
+  },
+  {
+    "id": "web_004",
+    "title": "Async/Await vs Promises",
+    "title_zh": "Async/Await 与 Promise",
+    "difficulty": "medium",
+    "tags": ["javascript", "async", "promises"],
+    "description": "Convert the Promise-based code to async/await syntax.",
+    "description_zh": "将基于 Promise 的代码改写为 async/await 语法。",
+    "starter_code": "# Original Promise code:\ndef fetch_data():\n    return 'data'\n\npromise = fetch_data()\nresult = promise.then(lambda d: print(f'Got: {d}'))\n\n# Convert the above to async/await style in Python pseudocode:\nasync_code = '''\n# async def fetch_data():\n#     return 'data'\n#\n# async def main():\n#     # Your code here\n#     pass\n'''\nprint(async_code)",
+    "solution": "async_code = '''\nimport asyncio\n\nasync def fetch_data():\n    await asyncio.sleep(0)  # simulate async\n    return 'data'\n\nasync def main():\n    result = await fetch_data()\n    print(f\\\"Got: {result}\\\")\n\nasyncio.run(main())\n'''",
+    "hint": "async def defines an async function; await pauses until the promise resolves; wrap with asyncio.run() to execute.",
+    "hint_zh": "async def 定义异步函数；await 等待 Promise 结果；用 asyncio.run() 执行主函数。",
+    "test_assertions": "assert 'async def' in async_code\nassert 'await' in async_code\nprint('All checks passed!')"
+  },
+  {
+    "id": "web_005",
+    "title": "CSS Grid Layout",
+    "title_zh": "CSS Grid 布局",
+    "difficulty": "medium",
+    "tags": ["css", "grid"],
+    "description": "Create a 3-column grid where the first column spans 2 rows, and the last row spans all 3 columns.",
+    "description_zh": "创建一个 3 列网格，第一列占 2 行高度，最后一行横跨全部 3 列。",
+    "starter_code": "css = '''\n.grid-container {\n    display: grid;\n    /* Your code here */\n}\n\n.item-1 {\n    /* Your code here - span 2 rows */\n}\n\n.item-5 {\n    /* Your code here - span 3 columns */\n}\n'''\nprint(css)",
+    "solution": "css = '''\n.grid-container {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    grid-auto-rows: 100px;\n    gap: 10px;\n}\n\n.item-1 {\n    grid-row: span 2;\n}\n\n.item-5 {\n    grid-column: span 3;\n}\n'''",
+    "hint": "Use grid-row: span 2 for vertical spanning and grid-column: span 3 for horizontal spanning.",
+    "hint_zh": "垂直方向跨行用 grid-row: span 2，水平方向跨列用 grid-column: span 3。",
+    "test_assertions": "assert 'grid-row: span 2' in css\nassert 'grid-column: span 3' in css\nassert 'display: grid' in css\nprint('All checks passed!')"
+  }
+]

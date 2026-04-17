@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ds_001",
+    "title": "Stack with Min",
+    "title_zh": "带最小值的栈",
+    "difficulty": "medium",
+    "tags": ["stack", "design"],
+    "description": "Implement a stack that supports push, pop, top, and retrieving the minimum element in O(1) time.",
+    "description_zh": "实现一个栈，支持 push、pop、top 和 O(1) 时间获取最小值。",
+    "starter_code": "class MinStack:\n    def __init__(self):\n        # Your code here\n        pass\n\n    def push(self, val):\n        # Your code here\n        pass\n\n    def pop(self):\n        # Your code here\n        pass\n\n    def top(self):\n        # Your code here\n        pass\n\n    def get_min(self):\n        # Your code here\n        pass\n\n# Test\ns = MinStack()\ns.push(3); s.push(5); s.push(1); s.push(2)\nprint(s.get_min())  # 1\ns.pop()\nprint(s.top())      # 1\nprint(s.get_min())  # 1",
+    "solution": "class MinStack:\n    def __init__(self):\n        self.stack = []\n        self.min_stack = []\n\n    def push(self, val):\n        self.stack.append(val)\n        if not self.min_stack or val <= self.min_stack[-1]:\n            self.min_stack.append(val)\n\n    def pop(self):\n        if self.stack.pop() == self.min_stack[-1]:\n            self.min_stack.pop()\n\n    def top(self):\n        return self.stack[-1]\n\n    def get_min(self):\n        return self.min_stack[-1]",
+    "hint": "Maintain a second stack that tracks the minimum at each state. Push to min_stack only when the new value <= current min.",
+    "hint_zh": "维护一个辅助栈，同步记录每个状态的最小值，只有当新值 <= 当前最小值时才入辅助栈。",
+    "test_assertions": "s = MinStack()\ns.push(3);s.push(5);s.push(1);s.push(2)\nassert s.get_min() == 1\ns.pop()\nassert s.top() == 1\nassert s.get_min() == 1\nprint('All tests passed!')"
+  },
+  {
+    "id": "ds_002",
+    "title": "Implement a Queue with Two Stacks",
+    "title_zh": "用两个栈实现队列",
+    "difficulty": "medium",
+    "tags": ["stack", "queue", "design"],
+    "description": "Implement a queue using two stacks. The queue should support enqueue, dequeue, and peek operations.",
+    "description_zh": "用两个栈实现一个队列，支持入队、出队和查看队首操作。",
+    "starter_code": "class QueueWithStacks:\n    def __init__(self):\n        # Your code here\n        pass\n\n    def enqueue(self, val):\n        # Your code here\n        pass\n\n    def dequeue(self):\n        # Your code here\n        pass\n\n    def peek(self):\n        # Your code here\n        pass\n\n# Test\nq = QueueWithStacks()\nq.enqueue(1); q.enqueue(2); q.enqueue(3)\nprint(q.dequeue())  # 1\nprint(q.peek())      # 2",
+    "solution": "class QueueWithStacks:\n    def __init__(self):\n        self.stack_in = []\n        self.stack_out = []\n\n    def enqueue(self, val):\n        self.stack_in.append(val)\n\n    def dequeue(self):\n        if not self.stack_out:\n            while self.stack_in:\n                self.stack_out.append(self.stack_in.pop())\n        return self.stack_out.pop() if self.stack_out else None\n\n    def peek(self):\n        if not self.stack_out:\n            while self.stack_in:\n                self.stack_out.append(self.stack_in.pop())\n        return self.stack_out[-1] if self.stack_out else None",
+    "hint": "stack_in for enqueue, stack_out for dequeue. When stack_out is empty, transfer all from stack_in.",
+    "hint_zh": "stack_in 负责入队，stack_out 负责出队。stack_out 为空时，将 stack_in 的内容全部倒入。",
+    "test_assertions": "q = QueueWithStacks()\nq.enqueue(1);q.enqueue(2);q.enqueue(3)\nassert q.dequeue() == 1\nassert q.peek() == 2\nassert q.dequeue() == 2\nprint('All tests passed!')"
+  },
+  {
+    "id": "ds_003",
+    "title": "Binary Search Tree Validation",
+    "title_zh": "验证二叉搜索树",
+    "difficulty": "medium",
+    "tags": ["binary-tree", "bst", "dfs"],
+    "description": "Given the root of a binary tree, determine if it is a valid BST. A BST's left subtree contains only nodes less than the node, and right subtree contains only nodes greater than the node.",
+    "description_zh": "给定二叉树的根节点，判断它是否为有效的二叉搜索树（BST）。左子树所有节点小于当前节点，右子树所有节点大于当前节点。",
+    "starter_code": "# Definition of TreeNode:\nclass TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\ndef is_valid_bst(root):\n    # Your code here\n    pass\n\n# Build tree: [2,1,3]\ntree1 = TreeNode(2, TreeNode(1), TreeNode(3))\nprint(is_valid_bst(tree1))  # True\n\n# Build tree: [5,1,4,null,null,3,6]\ntree2 = TreeNode(5, TreeNode(1), TreeNode(4, TreeNode(3), TreeNode(6)))\nprint(is_valid_bst(tree2))  # False",
+    "solution": "def is_valid_bst(root, lo=float('-inf'), hi=float('inf')):\n    if not root:\n        return True\n    if not (lo < root.val < hi):\n        return False\n    return is_valid_bst(root.left, lo, root.val) and is_valid_bst(root.right, root.val, hi)",
+    "hint": "Pass lower and upper bounds down the recursion. At each node, check it falls within the valid range.",
+    "hint_zh": "递归时传递有效范围的上界和下界，在每个节点检查其值是否在范围内。",
+    "test_assertions": "t1 = TreeNode(2, TreeNode(1), TreeNode(3))\nassert is_valid_bst(t1) == True\nt2 = TreeNode(5, TreeNode(1), TreeNode(4, TreeNode(3), TreeNode(6)))\nassert is_valid_bst(t2) == False\nprint('All tests passed!')"
+  },
+  {
+    "id": "ds_004",
+    "title": "Hash Map Implementation",
+    "title_zh": "哈希表实现",
+    "difficulty": "hard",
+    "tags": ["hash-table", "design"],
+    "description": "Implement a simple hash map from scratch with put(key, value) and get(key) methods. Use separate chaining for collision handling.",
+    "description_zh": "从头实现一个简单哈希表，支持 put(key, value) 和 get(key)，使用链地址法解决冲突。",
+    "starter_code": "class HashMap:\n    def __init__(self, size=16):\n        # Your code here\n        pass\n\n    def _hash(self, key):\n        # Simple hash function\n        return hash(key) % self.size\n\n    def put(self, key, value):\n        # Your code here\n        pass\n\n    def get(self, key):\n        # Your code here\n        pass\n\n# Test\nhm = HashMap()\nhm.put('name', 'Alice')\nhm.put('age', 30)\nprint(hm.get('name'))  # Alice\nprint(hm.get('age'))   # 30\nprint(hm.get('none'))  # None",
+    "solution": "class HashMap:\n    def __init__(self, size=16):\n        self.size = size\n        self.buckets = [[] for _ in range(size)]\n\n    def _hash(self, key):\n        return hash(key) % self.size\n\n    def put(self, key, value):\n        idx = self._hash(key)\n        bucket = self.buckets[idx]\n        for i, (k, v) in enumerate(bucket):\n            if k == key:\n                bucket[i] = (key, value)\n                return\n        bucket.append((key, value))\n\n    def get(self, key):\n        idx = self._hash(key)\n        for k, v in self.buckets[idx]:\n            if k == key:\n                return v\n        return None",
+    "hint": "Store key-value pairs as tuples in a list (bucket). When putting, update if key exists or append; when getting, search the bucket.",
+    "hint_zh": "用列表（桶）存储键值对。put 时更新或追加，get 时在桶中查找。",
+    "test_assertions": "hm = HashMap()\nhm.put('name','Alice')\nhm.put('age',30)\nassert hm.get('name') == 'Alice'\nassert hm.get('age') == 30\nassert hm.get('none') is None\nhm.put('name','Bob')\nassert hm.get('name') == 'Bob'\nprint('All tests passed!')"
+  },
+  {
+    "id": "ds_005",
+    "title": "Trie (Prefix Tree)",
+    "title_zh": "字典树（前缀树）",
+    "difficulty": "hard",
+    "tags": ["trie", "design"],
+    "description": "Implement a Trie with insert(word), search(word), and startsWith(prefix) methods.",
+    "description_zh": "实现一个字典树（前缀树），支持 insert(word)、search(word) 和 startsWith(prefix) 操作。",
+    "starter_code": "class Trie:\n    def __init__(self):\n        # Your code here\n        pass\n\n    def insert(self, word):\n        # Your code here\n        pass\n\n    def search(self, word):\n        # Your code here\n        pass\n\n    def startsWith(self, prefix):\n        # Your code here\n        pass\n\n# Test\nt = Trie()\nt.insert('apple')\nprint(t.search('apple'))     # True\nprint(t.search('app'))       # False\nprint(t.startsWith('app'))   # True",
+    "solution": "class Trie:\n    def __init__(self):\n        self.children = {}\n        self.is_end = False\n\n    def insert(self, word):\n        node = self\n        for ch in word:\n            if ch not in node.children:\n                node.children[ch] = Trie()\n            node = node.children[ch]\n        node.is_end = True\n\n    def search(self, word):\n        node = self._find(word)\n        return node is not None and node.is_end\n\n    def startsWith(self, prefix):\n        return self._find(prefix) is not None\n\n    def _find(self, prefix):\n        node = self\n        for ch in prefix:\n            if ch not in node.children:\n                return None\n            node = node.children[ch]\n        return node",
+    "hint": "Each node is a Trie itself with a children dict and an is_end flag. Navigate by characters during search.",
+    "hint_zh": "每个节点包含 children 字典和 is_end 标志，按字符导航完成搜索。",
+    "test_assertions": "t = Trie()\nt.insert('apple')\nassert t.search('apple') == True\nassert t.search('app') == False\nassert t.startsWith('app') == True\nt.insert('app')\nassert t.search('app') == True\nprint('All tests passed!')"
+  }
+]
